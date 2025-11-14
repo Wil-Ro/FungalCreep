@@ -1,0 +1,2 @@
+pycurses==0.0.37
+numpy==2.2.0
