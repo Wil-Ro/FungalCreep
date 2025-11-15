@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 from acre_state import AcreState
 
 
@@ -6,6 +8,7 @@ class AttackAcre(AcreState):
     def __init__(self, symbol):
         super.__init__(symbol)
 
+    @abstractmethod
     def update(self, board, x, y):
         """
         :param board: Copy of the board object we're updating
