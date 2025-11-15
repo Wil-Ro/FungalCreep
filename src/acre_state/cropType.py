@@ -5,6 +5,11 @@ from .attack_acre_seed import AttackAcreSeed
 from .defender_acre import DefenderAcre
 from .empty_acre import EmptyAcre
 
+"""
+Crop Type enum
+Holds references to all acre state classes to stop circular dependencies
+
+"""
 class CropType(Enum):
     defender = DefenderAcre
     empty = EmptyAcre

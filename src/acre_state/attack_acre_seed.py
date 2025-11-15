@@ -4,9 +4,20 @@ from .acre_state import AcreState
 
 import curses
 
+"""
+Attack Acre Seed Class
+Inherits from attack acre class
+
+"""
 class AttackAcreSeed(AcreState):
 
-    def __init__(self):
+    def __init__(self, symbol, style, colour):
+        """
+
+        :param symbol:
+        :param style:
+        :param colour:
+        """
         super().__init__("▁", curses.A_NORMAL, None)
 
     def update(self, board, x, y):
@@ -23,8 +34,10 @@ class AttackAcreSeed(AcreState):
         from .cropType import CropType
         if self.doesSurroundingContainCrop(board, x, y):
             newCrop = CropType.sprout.value()
+            logging.info("This seed sprouted")
         else:
             newCrop = CropType.empty.value()
+            logging.debug("This seed not sprouted")
         logging.debug(newCrop)
         board[x][y] = newCrop
 
@@ -37,6 +50,7 @@ class AttackAcreSeed(AcreState):
         :param y: coordinate on board
         :return: if any non-diagonal adjacent cell is of type attack acre crop
         """
+
         from .cropType import CropType
         try:
             if isinstance(board[x - 1][y], CropType.crop.value):

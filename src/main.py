@@ -1,15 +1,16 @@
 import logging
+from datetime import datetime
 
 logging.basicConfig(
-    filename="app.log",
+    filename="Logs/" + datetime.now().strftime('mylogfile_%H_%M_%d_%m_%Y.log'),
     encoding="utf-8",
     filemode="a",
     format="{asctime} - {levelname} - {message}",
     style="{",
     datefmt="%Y-%m-%d %H:%M",
+    level=logging.DEBUG
 )
 
-logging.warning("Save me!")
 
 from curses import wrapper
 from display import Display
@@ -54,6 +55,7 @@ class Game:
         self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
 
     def run(self):
+
         while True:
             self.disp.clear_screen()
             self.disp.draw_board(0, 0, self.players[0].board)
@@ -61,9 +63,12 @@ class Game:
             input = self.inter.input_box(0, 14, "enter move")
             if input is not None:
                 self.process_input(input)
+                self.updater.GrowthUpdate(self.players[0].board)
+                self.updater.GrowthUpdate(self.players[1].board)
             self.disp.update_screen()
             
             
+
 
         # we eventually want:
         # call method to check for inputs
