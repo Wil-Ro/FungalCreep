@@ -33,19 +33,16 @@ class Display:
     def get_window_size(self):
         return curses.COLS, curses.LINES
 
-    def hello_world(self):
-        # w,h = self.get_window_size()
-        # text_x, text_y = int(w/2)-6, int(h/2)
-        # self.window.addstr(text_x, text_y, "hello world")
-        self.window.addstr(10, 10, "hello world\n:)")
-
+    def write_string(self, x, y, text):
+        self.window.addstr(y, x, text)
+    
     def draw_board(self, x, y, board):
         for column in board.contents:
             for acre in column:
                 # replace acre.style with acre.style|acre.colour to let them
                 # control their own colour
                 # logging.debug(acre)
-                self.window.addstr(x, y*2, f"{acre.symbol}{acre.symbol}", acre.style)
-                y += 1
-            x += 1
-            y = 0
+                self.window.addstr(y, x*2, f"{acre.symbol}{acre.symbol}", acre.style)
+                x += 1
+            y += 1
+            x = 0
