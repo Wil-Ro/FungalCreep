@@ -19,8 +19,8 @@ class GameplayUpdate:
         Updates board state for othello rules
         :return:
         """
-        board_width = Board.default_size[1]
-        board_height = Board.default_size[0]
+        board_width = Board.default_size[0]
+        board_height = Board.default_size[1]
         # remember to update these if I find something that makes that easy
 
 
@@ -46,11 +46,11 @@ class GameplayUpdate:
                 y_above.reverse()
             for i in range (min(board_width-x, y)):
                 xy_after_above.append(board.contents[x+i+1, y-i-1])
-            for i in range (board_width-x):
+            for i in range (board_width-x-1):
                 x_after.append(board.contents[x+i+1,y])
             for i in range (min(board_width-x, board_height-y)):
                 xy_after_below.append(board.contents[x+i+1, y+i+1])
-            for i in range (board_height-y):
+            for i in range (board_height-y-1):
                 y_below.append(board.contents[x,y+i+1])
             for i in range (min(x, board_height-y)):
                 xy_before_below.append(board.contents[x-i-1, y+i+1])
