@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+import logging
 
 class AcreState(ABC):
 
@@ -19,4 +19,4 @@ class AcreState(ABC):
         :param y: y coordinate on board
         :return: nothing
         """
-        print("You shouldn't be able to call this Acre State Update")
+        logging.info("You shouldn't be able to call this Acre State Update")
