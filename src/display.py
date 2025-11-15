@@ -33,6 +33,9 @@ class Display:
     def get_window_size(self):
         return curses.COLS, curses.LINES
 
+    def write_string(self, x, y, text):
+        self.window.addstr(y, x, text)
+    
     def draw_board(self, x, y, board):
         for column in board.contents:
             for acre in column:
