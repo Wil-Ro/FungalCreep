@@ -1,7 +1,7 @@
 
 from .acre_state import AcreState
 import curses
-
+import logging
 
 class DefenderAcre(AcreState):
 
@@ -15,4 +15,4 @@ class DefenderAcre(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        print("I'm a defender, you don't have anything to do with me in growth phase")
+        logging.info("I'm a defender, you don't have anything to do with me in growth phase")

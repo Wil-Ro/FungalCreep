@@ -1,5 +1,5 @@
 import curses
-
+import logging
 '''
 Curses gives us a single "window" object that does input and output,
 it does this with weird quirks because its a c program under the hood.
@@ -44,6 +44,7 @@ class Display:
             for acre in column:
                 # replace acre.style with acre.style|acre.colour to let them
                 # control their own colour
+                # logging.debug(acre)
                 self.window.addstr(x, y*2, f"{acre.symbol}{acre.symbol}", acre.style)
                 y += 1
             x += 1
