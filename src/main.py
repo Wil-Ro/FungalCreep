@@ -2,6 +2,8 @@ from curses import wrapper
 from display import Display
 from input import Input
 from board import Board
+from player import Player
+from interactive_display import InteractiveDisplay
 from gameplay_update import GameplayUpdate
 from acre_state.defender_acre import DefenderAcre
 from acre_state.attack_acre_sprout import AttackAcreSprout
@@ -20,23 +22,17 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
+        self.inter = InteractiveDisplay(self.disp, self.inp)
+        self.players = [Player("player 1", None), Player("player 2", None)]
+        self.turn_index = 0
         self.updater = GameplayUpdate()
         # we eventually want:
         # players are stored here, they store their boards
 
     def run(self):
-        b = Board()
-        b.set_acre_state(3, 3, DefenderAcre())
-        b.set_acre_state(3, 4, AttackAcreSeed())
-        b.set_acre_state(3, 5, AttackAcreSprout())
-        b.set_acre_state(3, 1, AttackAcreCrop())
-        b.set_acre_state(5, 4, AttackAcreSeed())
-        b.set_acre_state(5, 5, AttackAcreSprout())
-        b.set_acre_state(5, 1, AttackAcreCrop())
-        b.set_acre_state(3, 6, DefenderAcre())
-        b.set_acre_state(5, 0, DefenderAcre())
         while True:
-            self.disp.draw_board(0, 0, b)
+            self.inter.basic_input_window()
+            self.disp.draw_board(0, 0, board)
             self.disp.update_screen()
             self.inp.wait_on_key("q")
             b = self.updater.OthelloUpdate(b,1,2)
