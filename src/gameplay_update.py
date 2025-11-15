@@ -19,8 +19,10 @@ class GameplayUpdate:
         Updates board state for othello rules
         :return:
         """
-        board_width = Board.default_size[0]
-        board_height = Board.default_size[1]
+        # board_width = Board.default_size[0]
+        # board_height = Board.default_size[1]
+        board_width = 6
+        board_height = 6
         # remember to update these if I find something that makes that easy
 
 
