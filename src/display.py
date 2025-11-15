@@ -1,5 +1,16 @@
 import curses
 
+'''
+Curses gives us a single "window" object that does input and output,
+it does this with weird quirks because its a c program under the hood.
+
+This takes that object and wraps up its display methods things into
+something nicer
+
+its also in charge of displaying specific screens e.g. the input screen
+and menu
+'''
+
 
 class Display:
     def __init__(self, window):
