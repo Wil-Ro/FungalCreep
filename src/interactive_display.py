@@ -18,8 +18,8 @@ class InteractiveDisplay:
         answer = ""
         while True:
             self.window.clear()
-            self.window.addstr(x-1, y, question)
-            self.window.addstr(x, y, answer)
+            self.window.addstr(y-1, x, question)
+            self.window.addstr(y, x, answer)
             latest_input = self.inp.wait_on_any_key()
             if latest_input == curses.KEY_ENTER:
                 return answer
@@ -29,11 +29,8 @@ class InteractiveDisplay:
                 answer += latest_input
 
     def input_box(self, x, y, question, max_answer_length = 4):
-        y -= max_answer_length
-
-
-        self.window.addstr(x-1, y, question)
-        self.window.addstr(x, y, self.answer)
+        self.window.addstr(y-1, x, question)
+        self.window.addstr(y, x, self.answer)
         latest_input = self.inp.get_key_now()
         if latest_input == " ":
             ans = self.answer
