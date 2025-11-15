@@ -28,6 +28,11 @@ class Game:
         b.set_acre_state(3, 4, AttackAcreSeed())
         b.set_acre_state(3, 5, AttackAcreSprout())
         b.set_acre_state(3, 1, AttackAcreCrop())
+        b.set_acre_state(5, 4, AttackAcreSeed())
+        b.set_acre_state(5, 5, AttackAcreSprout())
+        b.set_acre_state(5, 1, AttackAcreCrop())
+        b.set_acre_state(3, 6, DefenderAcre())
+        b.set_acre_state(5, 0, DefenderAcre())
         while True:
             self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
