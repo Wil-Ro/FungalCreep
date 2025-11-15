@@ -1,11 +1,14 @@
 from acre_state import AcreState
 from attack_acre_seed import AttackAcreSeed
 from empty_acre import EmptyAcre
+from acre_state.acre_state import AcreState
+import curses
+
 
 class AttackAcreCrop(AcreState):
 
-    def __init__(self, symbol):
-        super.__init__(symbol)
+    def __init__(self):
+        super().__init__("▓", curses.A_NORMAL, None)
 
     def update(self, board, x, y):
         """
