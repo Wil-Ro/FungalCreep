@@ -25,7 +25,6 @@ class GameplayUpdate:
 
 
         for cell in board.contents:
-            print(cell)
             # making 8 lists of the directions going away from the piece that's going to do the othelloing
             x_before =[]
             xy_before_above = []
