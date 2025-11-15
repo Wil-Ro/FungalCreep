@@ -61,10 +61,10 @@ class GameplayUpdate:
         # goes through and puts any acres that should be claimed in to_flip
         to_flip = []
         for direction in directions:
-            attack_possible = False
-            for cell in direction:
-                if isinstance(cell, DefenderAcre):
-                    attack_possible = True
+            attack_possible = True
+            # for cell in direction:
+            #     if isinstance(cell, DefenderAcre):
+            #         attack_possible = True
             potential_flips = []
             for cell in direction:
                 if attack_possible and isinstance(cell, AttackAcre):
