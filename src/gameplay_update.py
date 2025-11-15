@@ -1,5 +1,5 @@
 import numpy as np
-from .board import Board
+from board import Board
 from acre_state.defender_acre import DefenderAcre
 from acre_state.empty_acre import EmptyAcre
 from acre_state.attack_acre import AttackAcre
@@ -24,8 +24,7 @@ class GameplayUpdate:
         # remember to update these if I find something that makes that easy
 
 
-        for cell in board.contents():
-            print(cell)
+        for cell in board.contents:
             # making 8 lists of the directions going away from the piece that's going to do the othelloing
             x_before =[]
             xy_before_above = []
@@ -37,23 +36,23 @@ class GameplayUpdate:
             xy_before_below = []
             directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
             for i in range (x):
-                x_before.append(board.contents()[i,y])
+                x_before.append(board.contents[i,y])
                 x_before.reverse()
             for i in range (min(x, y)):
-                xy_before_above.append(board.contents()[x-i-1, y-i-1])
+                xy_before_above.append(board.contents[x-i-1, y-i-1])
             for i in range (y):
-                y_above.append(board.contents()[x,i])
+                y_above.append(board.contents[x,i])
                 y_above.reverse()
             for i in range (min(board_width-x, y)):
-                xy_after_above.append(board.contents()[x+i+1, y-i-1])
-            for i in range (board_width-x):
-                x_after.append(board.contents()[x+i+1,y])
+                xy_after_above.append(board.contents[x+i+1, y-i-1])
+            for i in range (board_width-x-3):
+                x_after.append(board.contents[x+i+1,y])
             for i in range (min(board_width-x, board_height-y)):
-                xy_after_below.append(board.contents()[x+i+1, y+i+1])
-            for i in range (board_height-y):
-                y_below.append(board.contents()[x,y+i+1])
+                xy_after_below.append(board.contents[x+i+1, y+i+1])
+            for i in range (board_height-y-1):
+                y_below.append(board.contents[x,y+i+1])
             for i in range (min(x, board_height-y)):
-                xy_before_below.append(board.contents()[x-i-1, y+i+1])
+                xy_before_below.append(board.contents[x-i-1, y+i+1])
 
 
 

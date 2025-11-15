@@ -2,6 +2,7 @@ from curses import wrapper
 from display import Display
 from input import Input
 from board import Board
+from gameplay_update import GameplayUpdate
 from acre_state.defender_acre import DefenderAcre
 from acre_state.attack_acre_sprout import AttackAcreSprout
 from acre_state.attack_acre_seed import AttackAcreSeed
@@ -19,6 +20,7 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
+        self.updater = GameplayUpdate()
         # we eventually want:
         # players are stored here, they store their boards
 
@@ -36,8 +38,11 @@ class Game:
         while True:
             self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
-            if self.inp.wait_on_key("q"):
-                break
+            self.inp.wait_on_key("q")
+            b = self.updater.OthelloUpdate(b,1,2)
+            self.disp.draw_board(0, 0, b)
+            self.disp.update_screen()
+            self.inp.wait_on_key("q")
 
         # we eventually want:
         # call method to check for inputs
