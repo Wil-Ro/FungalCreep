@@ -86,17 +86,18 @@ class GameplayUpdate:
         Updates board state for growth rules
         :return:
         """
-        # logging.debug("growth update")
-        # logging.debug(board.contents)
+        logging.debug("growth update")
+        logging.debug(board.contents)
 
         # iterates over the rows and colums of board
         # updating contents for each acreState object contained in each index
         for x, row in enumerate(board.contents):
             for y, acre in enumerate(row):
+                logging.debug("Updating cell: %x,%y", x,y)
                 acre.update(board.contents, x, y)
 
-        # logging.debug(board.contents)
-        #
-        # logging.debug("finished growth update")
+        logging.debug(board.contents)
+
+        logging.debug("finished growth update")
         # logging.debug(board)
         return board
