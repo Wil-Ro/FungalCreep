@@ -44,7 +44,7 @@ class Game:
 
     def run(self):
         while True:
-            self.inter.basic_input_window()
+            self.basic_input_window()
             self.disp.draw_board(0, 0, board)
             self.disp.update_screen()
             self.inp.wait_on_key("q")
