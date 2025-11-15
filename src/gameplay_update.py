@@ -20,7 +20,7 @@ class GameplayUpdate:
         :return:
         """
         board_width = Board.default_size[1]
-        board_height = Board.default_size[2]
+        board_height = Board.default_size[0]
         # remember to update these if I find something that makes that easy
 
 
