@@ -2,10 +2,7 @@ from curses import wrapper
 from display import Display
 from input import Input
 from board import Board
-from acre_state.defender_acre import DefenderAcre
-from acre_state.attack_acre_sprout import AttackAcreSprout
-from acre_state.attack_acre_seed import AttackAcreSeed
-from acre_state.attack_acre_crop import AttackAcreCrop
+from player import Player
 
 # have a peek here https://docs.python.org/3/howto/curses.html
 # to get the vibe of how curses works
@@ -19,15 +16,10 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
-        # we eventually want:
-        # players are stored here, they store their boards
+        self.players = [Player("player 1", None), Player("player 2", None)]
+        self.turn_index = 0
 
     def run(self):
-        b = Board()
-        b.set_acre_state(3, 3, DefenderAcre())
-        b.set_acre_state(3, 4, AttackAcreSeed())
-        b.set_acre_state(3, 5, AttackAcreSprout())
-        b.set_acre_state(3, 1, AttackAcreCrop())
         while True:
             self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
