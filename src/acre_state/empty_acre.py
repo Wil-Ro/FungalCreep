@@ -1,5 +1,7 @@
-import acre_state
+from acre_state import AcreState
 
-class EmptyAcre(acre_state):
-    def __init__(self):
-        pass
+
+class EmptyAcre(AcreState):
+
+    def __init__(self,symbol):
+        super.__init__(symbol)

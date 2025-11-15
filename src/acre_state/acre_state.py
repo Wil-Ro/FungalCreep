@@ -3,13 +3,9 @@ from abc import ABC, abstractmethod
 class AcreState(ABC):
 
     @abstractmethod
-    def __init__(self):
-        pass
+    def __init__(self, symbol):
+        self.symbol = symbol
 
     @abstractmethod
-    def x(self):
-        pass
-
-    @abstractmethod
-    def y(self):
+    def update(self):
         pass

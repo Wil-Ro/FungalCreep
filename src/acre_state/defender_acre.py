@@ -1,5 +1,13 @@
-import acre_state
+from acre_state import AcreState
 
-class DefenderAcre(acre_state):
-    def __init__(self):
+class DefenderAcre(AcreState):
+
+    def __init__(self, symbol):
+        super.__init__(symbol)
+
+    def update(self):
+        """
+
+        :return:
+        """
         pass
