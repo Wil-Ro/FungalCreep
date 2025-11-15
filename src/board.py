@@ -10,5 +10,3 @@ class Board:
         self.contents[x][y] = state
 
     # oats
-
-
