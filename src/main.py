@@ -42,16 +42,25 @@ class Game:
         # we eventually want:
         # players are stored here, they store their boards
 
+    def process_input(self, input):
+        # player number | item placing | x | y
+        opts = {"a": DefenderAcre, "b": AttackAcreCrop}
+        player =int(input[0])
+        item = opts[input[1]]
+        x =int(input[2])
+        y =int(input[3])
+
+        self.players[player].board.set_acre_state(x, y, item())
+
     def run(self):
         while True:
-            self.inter.basic_input_window()
-            self.disp.draw_board(0, 0, board)
+            self.disp.clear_screen()
+            self.disp.draw_board(0, 0, self.players[0].board)
+            self.disp.draw_board(7, 0, self.players[1].board)
+            input = self.inter.input_box(14, 5, "enter move")
+            if input is not None:
+                self.process_input(input)
             self.disp.update_screen()
-            self.inp.wait_on_key("q")
-            b = self.updater.OthelloUpdate(b,1,2)
-            self.disp.draw_board(0, 0, b)
-            self.disp.update_screen()
-            self.inp.wait_on_key("q")
 
         # we eventually want:
         # call method to check for inputs

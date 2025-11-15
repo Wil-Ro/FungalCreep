@@ -37,7 +37,18 @@ class Input:
         return False
 
     # waits forver till a key
-    def wait_indefinitely_for_key(self):
+    def wait_indefinitely_for_any_key(self):
         curses.nocbreak()  # no timeout
-        self.window.getch()
+        key_given = self.window.getch()
         curses.halfdelay(20)  # timeout back on
+        return key_given
+
+    def get_key_now(self):
+        inp = None
+        self.window.nodelay(True)
+        try:
+            inp = self.window.getkey()
+        except curses.error:
+            pass
+        self.window.nodelay(False)
+        return inp
