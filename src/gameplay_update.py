@@ -1,5 +1,5 @@
 import numpy as np
-from .board import Board
+from board import Board
 from acre_state.defender_acre import DefenderAcre
 from acre_state.empty_acre import EmptyAcre
 from acre_state.attack_acre import AttackAcre
