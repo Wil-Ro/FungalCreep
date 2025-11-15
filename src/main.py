@@ -35,7 +35,7 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
-        self.inter = InteractiveDisplay(self.disp, self.inp)
+        # self.inter = InteractiveDisplay(self.disp, self.inp)
         self.players = [Player("player 1", None), Player("player 2", None)]
         self.turn_index = 0
         self.updater = GameplayUpdate()
