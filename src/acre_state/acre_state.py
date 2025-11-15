@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class AcreState(ABC):
 
     @abstractmethod
@@ -7,6 +8,7 @@ class AcreState(ABC):
         self.symbol = symbol
         self.style = style
         self.colour = colour
+
 
     @abstractmethod
     def update(self, board, x, y):

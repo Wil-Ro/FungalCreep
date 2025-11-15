@@ -1,6 +1,6 @@
-from acre_state import AcreState
-from attack_acre_crop import AttackAcreCrop
-from acre_state.acre_state import AcreState
+
+
+from .acre_state import AcreState
 import curses
 
 
@@ -18,4 +18,4 @@ class AttackAcreSprout(AcreState):
         :return:
         """
         print("Attack sprouts become crop")
-        board[x][y] = AttackAcreCrop()
+        return CropType.crop.value()

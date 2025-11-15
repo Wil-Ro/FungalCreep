@@ -1,5 +1,5 @@
-from acre_state import AcreState
-from acre_state.acre_state import AcreState
+
+from .acre_state import AcreState
 import curses
 
 

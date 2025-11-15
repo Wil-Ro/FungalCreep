@@ -1,6 +1,7 @@
 from abc import abstractmethod
 
-from acre_state import AcreState
+
+from .acre_state import AcreState
 
 
 class AttackAcre(AcreState):

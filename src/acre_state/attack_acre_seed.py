@@ -1,8 +1,7 @@
-from acre_state import AcreState
-from attack_acre_sprout import AttackAcreSprout
-from attack_acre_crop import AttackAcreCrop
-from empty_acre import EmptyAcre
-from acre_state.acre_state import AcreState
+
+
+from .acre_state import AcreState
+
 import curses
 
 class AttackAcreSeed(AcreState):
@@ -21,10 +20,11 @@ class AttackAcreSeed(AcreState):
         :return:
         """
         print("Attack seeds become sprouts")
+        from .cropType import CropType
         if self.doesSurroundingContainCrop(board, x, y):
-            board[x][y] = AttackAcreSprout()
+            return CropType.sprout.value()
         else:
-            board[x][y] = EmptyAcre()
+            return CropType.empty.value()
 
     @staticmethod
     def doesSurroundingContainCrop(board, x, y):
@@ -35,13 +35,13 @@ class AttackAcreSeed(AcreState):
         :param y: coordinate on board
         :return: if any non-diagonal adjacent cell is of type attack acre crop
         """
-        if isinstance(board[x - 1][y],AttackAcreCrop):
+        if isinstance(board[x - 1][y], CropType.crop.value):
             return True
-        elif isinstance(board[x + 1][y],AttackAcreCrop):
+        elif isinstance(board[x + 1][y], CropType.crop.value):
             return True
-        elif isinstance(board[x][y - 1],AttackAcreCrop):
+        elif isinstance(board[x][y - 1], CropType.crop.value):
             return True
-        elif isinstance(board[x][y + 1],AttackAcreCrop):
+        elif isinstance(board[x][y + 1], CropType.crop.value):
             return True
         else:
             return False

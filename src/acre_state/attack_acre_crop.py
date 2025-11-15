@@ -1,7 +1,6 @@
-from acre_state import AcreState
-from attack_acre_seed import AttackAcreSeed
-from empty_acre import EmptyAcre
-from acre_state.acre_state import AcreState
+
+
+from .acre_state import AcreState
 import curses
 
 
@@ -30,12 +29,12 @@ class AttackAcreCrop(AcreState):
         :param y: coordinate on board
         :return:
         """
-
-        if isinstance(board[x - 1][y], EmptyAcre):
-            board[x - 1][y] = AttackAcreSeed()
-        elif isinstance(board[x + 1][y], EmptyAcre):
-            board[x + 1][y] = AttackAcreSeed
-        elif isinstance(board[x][y - 1], EmptyAcre):
-            board[x][y - 1] = AttackAcreSeed
-        elif isinstance(board[x][y + 1], EmptyAcre):
-            board[x][y + 1] = AttackAcreSeed
+        from .cropType import CropType
+        if isinstance(board[x - 1][y], CropType.empty.value):
+            board[x - 1][y] = CropType.seed.value()
+        elif isinstance(board[x + 1][y], CropType.empty.value):
+            board[x + 1][y] = CropType.seed.value()
+        elif isinstance(board[x][y - 1], CropType.empty.value):
+            board[x][y - 1] = CropType.seed.value()
+        elif isinstance(board[x][y + 1], CropType.empty.value):
+            board[x][y + 1] = CropType.seed.value()
