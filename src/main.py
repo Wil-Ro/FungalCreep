@@ -1,6 +1,7 @@
 from curses import wrapper
 from display import Display
 from input import Input
+from board import Board
 
 # have a peek here https://docs.python.org/3/howto/curses.html
 # to get the vibe of how curses works
@@ -18,8 +19,9 @@ class Game:
         # players are stored here, they store their boards
 
     def run(self):
+        b = Board()
         while True:
-            self.disp.hello_world()
+            self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
             if self.inp.wait_on_key("q"):
                 break

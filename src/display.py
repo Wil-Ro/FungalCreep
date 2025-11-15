@@ -1,5 +1,4 @@
 import curses
-from acre_state import acre_state
 
 '''
 Curses gives us a single "window" object that does input and output,
@@ -41,11 +40,11 @@ class Display:
         self.window.addstr(10, 10, "hello world")
 
     def draw_board(self, x, y, board):
-        board_text = ""
         for column in board.contents:
             for acre in column:
-                self.window.addstr(x, y, board_text)
+                # replace acre.style with acre.style|acre.colour to let them
+                # control their own colour
+                self.window.addstr(x, y, acre.symbol, acre.style)
                 x += 1
             y += 1
             
-
