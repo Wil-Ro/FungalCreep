@@ -61,6 +61,8 @@ class Game:
             if input is not None:
                 self.process_input(input)
             self.disp.update_screen()
+            
+            GameplayUpdate.OthelloUpdate(self.players[0].board(),input[2], input[3])
 
         # we eventually want:
         # call method to check for inputs
