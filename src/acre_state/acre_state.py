@@ -3,9 +3,10 @@ from abc import ABC, abstractmethod
 class AcreState(ABC):
 
     @abstractmethod
-    def __init__(self, symbol, coordinate):
+    def __init__(self, symbol, style, colour):
         self.symbol = symbol
-        self.coordinate = coordinate
+        self.style = style
+        self.colour = colour
 
     @abstractmethod
     def update(self):
