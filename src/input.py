@@ -18,7 +18,7 @@ class Input:
     # waits a lil' while for a key then moves on
     def wait_on_any_key(self):
         try:
-            key_given = self.window.getch()
+            key_given = self.window.getkey()
             return key_given
         except curses.error:
             pass
@@ -26,7 +26,7 @@ class Input:
     # waits a lil while for a specific key then moves on
     def wait_on_key(self, key):
         try:
-            key_given = self.window.getch()
+            key_given = self.window.getkey()
             if key_given is None:
                 return False
             if key_given == ord(key):

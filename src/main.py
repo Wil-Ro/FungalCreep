@@ -3,6 +3,7 @@ from display import Display
 from input import Input
 from board import Board
 from player import Player
+from interactive_display import InteractiveDisplay
 
 # have a peek here https://docs.python.org/3/howto/curses.html
 # to get the vibe of how curses works
@@ -16,12 +17,14 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
+        self.inter = InteractiveDisplay(self.disp, self.inp)
         self.players = [Player("player 1", None), Player("player 2", None)]
         self.turn_index = 0
 
     def run(self):
         while True:
-            self.disp.draw_board(0, 0, b)
+            self.inter.basic_input_window()
+            self.disp.draw_board(0, 0, board)
             self.disp.update_screen()
             if self.inp.wait_on_key("q"):
                 break
