@@ -62,7 +62,7 @@ class Game:
                 self.process_input(input)
             self.disp.update_screen()
             
-            GameplayUpdate.OthelloUpdate(self.players[0].board(),input[2], input[3])
+            GameplayUpdate.OthelloUpdate(self.players[0].board,input[2], input[3])
 
         # we eventually want:
         # call method to check for inputs
