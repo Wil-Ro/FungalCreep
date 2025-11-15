@@ -3,10 +3,19 @@ import logging
 from .acre_state import AcreState
 import curses
 
-
+"""
+Attack Acre Sprout
+Inherits from attack acre class
+"""
 class AttackAcreSprout(AcreState):
 
-    def __init__(self):
+    def __init__(self, symbol, style, colour):
+        """
+
+        :param symbol:
+        :param style:
+        :param colour:
+        """
         super().__init__("▄", curses.A_NORMAL, None)
 
     def update(self, board, x, y):

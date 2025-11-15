@@ -3,9 +3,20 @@ from .acre_state import AcreState
 import curses
 import logging
 
+"""
+Empty Acre
+Inherits from acre state class
+
+"""
 class EmptyAcre(AcreState):
 
-    def __init__(self):
+    def __init__(self, symbol, style, colour):
+        """
+
+        :param symbol:
+        :param style:
+        :param colour:
+        """
         super().__init__("▒", curses.A_NORMAL, None)
 
     def update(self, board, x, y):

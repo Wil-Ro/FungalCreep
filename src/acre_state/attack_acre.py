@@ -3,11 +3,21 @@ import logging
 
 from .acre_state import AcreState
 
+"""
+Acre State Class Abstract 
+Inherits from acre state class
 
+"""
 class AttackAcre(AcreState):
 
-    def __init__(self, symbol):
-        super.__init__(symbol)
+    def __init__(self, symbol, style, colour):
+        """
+
+        :param symbol:
+        :param style:
+        :param colour:
+        """
+        super.__init__(symbol, style, colour)
 
     @abstractmethod
     def update(self, board, x, y):
@@ -17,6 +27,7 @@ class AttackAcre(AcreState):
         :param y: y coordinate on board
         :return:
         """
+
         logging.info("You shouldn't be able to call this attack acre")
 
 
