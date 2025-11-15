@@ -43,7 +43,7 @@ class Game:
         # we eventually want:
         # players are stored here, they store their boards
 
-    def process_input(self, input):
+    def process_dev_input(self, input):
         # player number | item placing | x | y
         opts = {"a": DefenderAcre, "b": AttackAcreCrop}
         player =int(input[0])
@@ -54,14 +54,39 @@ class Game:
         self.players[player].board.set_acre_state(x, y, item())
         self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
 
+    def process_player_input(self, input):
+        # board (1-2) | x | y
+        player = int(input[0])-1
+        x = int(input[1])
+        y = int(input[2])
+
+        if player == self.turn_index:
+            item = DefenderAcre
+        else:
+            item = AttackAcreCrop
+
+        self.players[player].board.set_acre_state(x, y, item())
+        # self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
+        self.get_current_player().board = self.updater.GrowthUpdate(self.get_current_player().board)
+
+    def get_current_player(self):
+        return self.players[self.turn_index]
+
+    def increment_player(self):
+        self.turn_index = (self.turn_index+1) % len(self.players)
+
     def run(self):
 
         while True:
             self.disp.clear_screen()
             self.disp.draw_board(0, 0, self.players[0].board)
             self.disp.draw_board(0, 7, self.players[1].board)
-            input = self.inter.input_box(0, 14, "enter move")
+            self.disp.write_string(0, 13, f"{self.get_current_player().name}'s turn'")
+            input = self.inter.input_box(0, 15, "enter move")
             if input is not None:
+                self.process_player_input(input)
+                self.increment_player()
+
                 self.process_input(input)
                 self.updater.GrowthUpdate(self.players[0].board)
                 self.updater.GrowthUpdate(self.players[1].board)

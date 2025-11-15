@@ -19,10 +19,6 @@ class EmptyAcre(AcreState):
         """
         super().__init__("▒", curses.A_NORMAL, None)
 
-    def update(self):
-        pass
-
-
     def update(self, board, x, y):
         """
         :param board: Copy of the board object we're updating
