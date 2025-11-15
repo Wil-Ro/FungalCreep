@@ -44,7 +44,8 @@ class Display:
             for acre in column:
                 # replace acre.style with acre.style|acre.colour to let them
                 # control their own colour
-                self.window.addstr(x, y, acre.symbol, acre.style)
-                x += 1
-            y += 1
+                self.window.addstr(x, y*2, f"{acre.symbol}{acre.symbol}", acre.style)
+                y += 1
+            x += 1
+            y = 0
             
