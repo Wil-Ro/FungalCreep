@@ -3,7 +3,7 @@ from board import Board
 from acre_state.defender_acre import DefenderAcre
 from acre_state.empty_acre import EmptyAcre
 from acre_state.attack_acre import AttackAcre
-
+import logging
 
 
 class GameplayUpdate:
@@ -86,7 +86,17 @@ class GameplayUpdate:
         Updates board state for growth rules
         :return:
         """
+        # logging.debug("growth update")
+        # logging.debug(board.contents)
 
-        for x, row in enumerate(board):
+        # iterates over the rows and colums of board
+        # updating contents for each acreState object contained in each index
+        for x, row in enumerate(board.contents):
             for y, acre in enumerate(row):
-                acre.update(board, x, y)
+                acre.update(board.contents, x, y)
+
+        # logging.debug(board.contents)
+        #
+        # logging.debug("finished growth update")
+        # logging.debug(board)
+        return board

@@ -1,5 +1,5 @@
 
-
+import logging
 from .acre_state import AcreState
 import curses
 
@@ -17,7 +17,7 @@ class AttackAcreCrop(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        print("Crop spread to their neighbours")
+        logging.info("Crop spread to their neighbours")
         self.growSprouts(board, x, y)
 
     @staticmethod
@@ -30,11 +30,23 @@ class AttackAcreCrop(AcreState):
         :return:
         """
         from .cropType import CropType
-        if isinstance(board[x - 1][y], CropType.empty.value):
-            board[x - 1][y] = CropType.seed.value()
-        elif isinstance(board[x + 1][y], CropType.empty.value):
-            board[x + 1][y] = CropType.seed.value()
-        elif isinstance(board[x][y - 1], CropType.empty.value):
-            board[x][y - 1] = CropType.seed.value()
-        elif isinstance(board[x][y + 1], CropType.empty.value):
-            board[x][y + 1] = CropType.seed.value()
+        try:
+            if isinstance(board[x - 1][y], CropType.empty.value):
+                board[x - 1][y] = CropType.seed.value()
+        except IndexError:
+            pass
+        try:
+            if isinstance(board[x + 1][y], CropType.empty.value):
+                board[x + 1][y] = CropType.seed.value()
+        except IndexError:
+            pass
+        try:
+            if isinstance(board[x][y - 1], CropType.empty.value):
+                board[x][y - 1] = CropType.seed.value()
+        except IndexError:
+            pass
+        try:
+            if isinstance(board[x][y + 1], CropType.empty.value):
+                board[x][y + 1] = CropType.seed.value()
+        except IndexError:
+            pass

@@ -1,5 +1,5 @@
 
-
+import logging
 from .acre_state import AcreState
 import curses
 
@@ -17,5 +17,8 @@ class AttackAcreSprout(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        print("Attack sprouts become crop")
-        return CropType.crop.value()
+        logging.info("Attack sprouts become crop")
+        from .cropType import CropType
+        newCrop = CropType.crop.value()
+        logging.debug(newCrop)
+        board[x][y] = newCrop
