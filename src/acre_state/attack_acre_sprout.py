@@ -9,7 +9,7 @@ Inherits from attack acre class
 """
 class AttackAcreSprout(AcreState):
 
-    def __init__(self, symbol, style, colour):
+    def __init__(self):
         """
 
         :param symbol:

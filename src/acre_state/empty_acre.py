@@ -10,7 +10,7 @@ Inherits from acre state class
 """
 class EmptyAcre(AcreState):
 
-    def __init__(self, symbol, style, colour):
+    def __init__(self):
         """
 
         :param symbol:

@@ -52,6 +52,7 @@ class Game:
         y =int(input[3])
 
         self.players[player].board.set_acre_state(x, y, item())
+        self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
 
     def process_player_input(self, input):
         # board (1-2) | x | y
@@ -87,6 +88,8 @@ class Game:
                 self.increment_player()
                 
             self.disp.update_screen()
+            
+            
 
 
         # we eventually want:
