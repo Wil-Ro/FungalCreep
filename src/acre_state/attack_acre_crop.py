@@ -1,5 +1,13 @@
-import attack_acre
+from acre_state import AcreState
 
-class AttackAcreCrop(attack_acre):
-    def __init__(self):
+class AttackAcreCrop(AcreState):
+
+    def __init__(self, symbol):
+        super.__init__(symbol)
+
+    def update(self):
+        """
+
+        :return:
+        """
         pass
