@@ -37,5 +37,5 @@ class Display:
         # w,h = self.get_window_size()
         # text_x, text_y = int(w/2)-6, int(h/2)
         # self.window.addstr(text_x, text_y, "hello world")
-        self.window.addstr(10, 10, "hello world")
+        self.window.addstr(10, 10, "hello world\n:)")
 
