@@ -39,3 +39,13 @@ class Display:
         # self.window.addstr(text_x, text_y, "hello world")
         self.window.addstr(10, 10, "hello world")
 
+    def draw_board(self, x, y, board):
+        for column in board.contents:
+            for acre in column:
+                # replace acre.style with acre.style|acre.colour to let them
+                # control their own colour
+                self.window.addstr(x, y*2, f"{acre.symbol}{acre.symbol}", acre.style)
+                y += 1
+            x += 1
+            y = 0
+            
