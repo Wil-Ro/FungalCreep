@@ -9,7 +9,7 @@ Inherits from acre state class
 """
 class DefenderAcre(AcreState):
 
-    def __init__(self, symbol, style, colour):
+    def __init__(self):
         """
 
         :param symbol:
