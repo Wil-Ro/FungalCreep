@@ -24,3 +24,6 @@ class GameplayUpdate:
         :return:
         """
 
+        for x, row in enumerate(board):
+            for y, acre in enumerate(row):
+                acre.update(board, x, y)
