@@ -56,8 +56,8 @@ class Game:
         while True:
             self.disp.clear_screen()
             self.disp.draw_board(0, 0, self.players[0].board)
-            self.disp.draw_board(7, 0, self.players[1].board)
-            input = self.inter.input_box(14, 5, "enter move")
+            self.disp.draw_board(0, 7, self.players[1].board)
+            input = self.inter.input_box(0, 14, "enter move")
             if input is not None:
                 self.process_input(input)
             self.disp.update_screen()
