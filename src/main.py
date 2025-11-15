@@ -86,10 +86,7 @@ class Game:
             if input is not None:
                 self.process_player_input(input)
                 self.increment_player()
-
-                self.process_input(input)
-                self.updater.GrowthUpdate(self.players[0].board)
-                self.updater.GrowthUpdate(self.players[1].board)
+                
             self.disp.update_screen()
             
             
