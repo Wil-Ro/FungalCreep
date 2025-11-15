@@ -9,5 +9,12 @@ class AcreState(ABC):
         self.colour
 
     @abstractmethod
-    def update(self):
-        pass
+    def update(self, board, x, y):
+        """
+
+        :param board: Copy of the board object we're updating
+        :param x: x coordinate on board
+        :param y: y coordinate on board
+        :return: nothing
+        """
+        print("You shouldn't be able to call this Acre State Update")

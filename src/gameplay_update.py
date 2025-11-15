@@ -23,3 +23,4 @@ class GameplayUpdate:
         Updates board state for growth rules
         :return:
         """
+
