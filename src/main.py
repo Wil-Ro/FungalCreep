@@ -39,11 +39,11 @@ class Game:
             self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
             self.inp.wait_on_key("q")
-            b = self.updater.OthelloUpdate(b)
+            b = self.updater.OthelloUpdate(b,1,2)
             self.disp.draw_board(0, 0, b)
             self.disp.update_screen()
             self.inp.wait_on_key("q")
-            
+
         # we eventually want:
         # call method to check for inputs
         # call a method to draw screen
