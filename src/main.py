@@ -35,7 +35,7 @@ class Game:
     def __init__(self, window):
         self.disp = Display(window)
         self.inp = Input(window)
-        # self.inter = InteractiveDisplay(self.disp, self.inp)
+        self.inter = InteractiveDisplay(self.disp, self.inp)
         self.players = [Player("player 1", None), Player("player 2", None)]
         self.turn_index = 0
         self.updater = GameplayUpdate()
@@ -44,7 +44,7 @@ class Game:
 
     def run(self):
         while True:
-            self.basic_input_window()
+            self.inter.basic_input_window()
             self.disp.draw_board(0, 0, board)
             self.disp.update_screen()
             self.inp.wait_on_key("q")
