@@ -1,16 +1,13 @@
-from abc import abstractmethod
-import acre_state
+from acre_state import AcreState
 
-class AttackAcre(acre_state):
+class AttackAcre(AcreState):
 
-    @abstractmethod
-    def __init__(self):
-        pass
+    def __init__(self, symbol):
+        super.__init__(symbol)
 
-    @abstractmethod
-    def x(self):
-        pass
+    def update(self):
+        """
 
-    @abstractmethod
-    def y(self):
+        :return:
+        """
         pass
