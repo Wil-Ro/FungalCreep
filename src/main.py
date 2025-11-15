@@ -4,6 +4,11 @@ from input import Input
 from board import Board
 from player import Player
 from interactive_display import InteractiveDisplay
+from gameplay_update import GameplayUpdate
+from acre_state.defender_acre import DefenderAcre
+from acre_state.attack_acre_sprout import AttackAcreSprout
+from acre_state.attack_acre_seed import AttackAcreSeed
+from acre_state.attack_acre_crop import AttackAcreCrop
 
 # have a peek here https://docs.python.org/3/howto/curses.html
 # to get the vibe of how curses works
@@ -20,14 +25,20 @@ class Game:
         self.inter = InteractiveDisplay(self.disp, self.inp)
         self.players = [Player("player 1", None), Player("player 2", None)]
         self.turn_index = 0
+        self.updater = GameplayUpdate()
+        # we eventually want:
+        # players are stored here, they store their boards
 
     def run(self):
         while True:
             self.inter.basic_input_window()
             self.disp.draw_board(0, 0, board)
             self.disp.update_screen()
-            if self.inp.wait_on_key("q"):
-                break
+            self.inp.wait_on_key("q")
+            b = self.updater.OthelloUpdate(b,1,2)
+            self.disp.draw_board(0, 0, b)
+            self.disp.update_screen()
+            self.inp.wait_on_key("q")
 
         # we eventually want:
         # call method to check for inputs
