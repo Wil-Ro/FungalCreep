@@ -1,5 +1,6 @@
 from acre_state import AcreState
 
+
 class AttackAcre(AcreState):
 
     def __init__(self, symbol):
@@ -13,3 +14,5 @@ class AttackAcre(AcreState):
         :return:
         """
         print("You shouldn't be able to call this attack acre")
+
+

@@ -1,4 +1,5 @@
 from acre_state import AcreState
+from attack_acre_crop import AttackAcreCrop
 
 class AttackAcreSprout(AcreState):
 
@@ -14,3 +15,4 @@ class AttackAcreSprout(AcreState):
         :return:
         """
         print("Attack sprouts become crop")
+        board[x][y] = AttackAcreCrop()
