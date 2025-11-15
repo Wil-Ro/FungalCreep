@@ -51,7 +51,7 @@ class Game:
         y =int(input[3])
 
         self.players[player].board.set_acre_state(x, y, item())
-        GameplayUpdate.OthelloUpdate(self.players[0].board, input[2], input[3])
+        self.updater.OthelloUpdate(self.players[0].board, input[2], input[3])
 
     def run(self):
         while True:
