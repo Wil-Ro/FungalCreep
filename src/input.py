@@ -11,9 +11,14 @@ something nicer
 
 
 class Input:
+    KEY_UP = curses.KEY_UP
+    KEY_DOWN = curses.KEY_DOWN
+    KEY_ENTER = 10
+
     def __init__(self, window):
         self.window = window
         curses.halfdelay(10)  # set default timeout when waiting for keypress
+        window.keypad(True)
 
     # waits a lil' while for a key then moves on
     def wait_on_any_key(self):

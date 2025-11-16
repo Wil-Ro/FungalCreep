@@ -15,11 +15,13 @@ logging.basicConfig(
 from curses import wrapper
 from display import Display
 from input import Input
-from board import Board
 from player import Player
 from interactive_display import InteractiveDisplay
 from gameplay_update import GameplayUpdate
+from calculate_score import CalculateScore
 from acre_state.cropType import CropType
+from game_state import GameState
+from menu_options import MenuOptions
 
 
 # have a peek here https://docs.python.org/3/howto/curses.html
@@ -35,6 +37,7 @@ class Game:
         self.disp = Display(window)
         self.inp = Input(window)
         self.inter = InteractiveDisplay(self.disp, self.inp)
+        self.game_state = GameState.menu
         self.players = [Player("player 1", None), Player("player 2", None)]
         self.turn_index = 0
         self.updater = GameplayUpdate()
@@ -97,18 +100,84 @@ class Game:
         self.turn_index = (self.turn_index+1) % len(self.players)
 
     def primary_game_loop(self):
+        """
+        Handles main game screen
+        :return:
+        """
         game_over = False
         while not game_over:
+
             self.disp.clear_screen()
             self.disp.draw_board(0, 0, self.players[0].board)
             self.disp.draw_board(0, 7, self.players[1].board)
             self.disp.write_string(0, 13, f"{self.get_current_player().name}'s turn'")
             user_input = self.inter.input_box(0, 15, "enter move (expected format: boardNumber x y  (no spaces)")
+
             if user_input is not None:
                 if self.process_player_game_input(user_input):
                     self.increment_player()
 
             self.disp.update_screen()
+
+    def process_player_menu_input(self, user_input):
+        menu_direction = 0
+        if user_input == self.inp.KEY_UP:
+            menu_direction -= 1
+        if user_input == self.inp.KEY_DOWN:
+            menu_direction += 1
+        return menu_direction
+
+    def menu(self):
+        """
+        Handles menu screen
+        :return:
+        """
+        current_option = 0
+        while True:
+            self.disp.clear_screen()
+            self.disp.draw_menu(self.players, current_option)
+
+            user_input = self.inp.window.getch()
+            logging.debug("User input: %s",user_input)
+
+            if user_input is not -1:
+
+                current_option += self.process_player_menu_input(user_input)
+
+                if current_option < 0:
+                    current_option = len(MenuOptions)-1
+                elif current_option >= len(MenuOptions):
+                    current_option = 0
+
+
+                """
+                TODO refactor this to use menu option enum
+                """
+                if current_option == 0 and user_input == self.inp.KEY_ENTER:
+                    logging.debug("Running main game loop")
+                    self.game_state = GameState.main_loop
+                    break
+                if current_option == 1 and user_input == self.inp.KEY_ENTER:
+                    pass
+                if current_option == 2 and user_input == self.inp.KEY_ENTER:
+                    pass
+                if current_option == 3 and user_input == self.inp.KEY_ENTER:
+                    self.game_state = GameState.exit
+                    break
+
+
+
+            logging.debug("currentOption: %s", current_option)
+            self.disp.update_screen()
+
+
+    def score(self):
+        """
+        Handles score screen
+        :return:
+        """
+        score = CalculateScore(self.players)
+        self.disp.draw_score(score.calculate())
 
     def run(self):
         """
@@ -116,8 +185,23 @@ class Game:
         :return:
         """
 
+        while True:
 
-        self.primary_game_loop()
+            if self.game_state == GameState.menu:
+                self.menu()
+
+            elif self.game_state == GameState.options:
+                pass
+            elif self.game_state == GameState.main_loop:
+                self.primary_game_loop()
+
+            elif self.game_state == GameState.score:
+                self.score()
+            elif self.game_state == GameState.exit:
+                logging.debug("Qutting")
+                break
+
+
 
 
 

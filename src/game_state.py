@@ -1,6 +1,8 @@
 from enum import Enum
 
-class CropType(Enum):
+class GameState(Enum):
     menu = 0
     main_loop = 1
-    score = 2
+    options = 2
+    score = 3
+    exit = 4
