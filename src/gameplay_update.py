@@ -78,14 +78,14 @@ class GameplayUpdate:
             for cell in direction:
                 logging.debug("cell checking: %s", cell)
                 logging.debug("WHAT IS YOUR FUCKING TYPE %s", board.contents[cell[0]][cell[1]])
-                if attack_possible and isinstance(board.contents[cell], AttackAcre):
+                if attack_possible and isinstance(board.contents[cell[0]][cell[1]], AttackAcre):
                     logging.debug("cell checking attack: %s", cell)
                     potential_flips.append(cell)
-                elif attack_possible and isinstance(board.contents[cell], DefenderAcre):
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], DefenderAcre):
                     logging.debug("cell checking defender: %s", cell)
                     attack_possible = False
                     to_flip.append(potential_flips)
-                elif attack_possible and isinstance(board.contents[cell], EmptyAcre):
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], EmptyAcre):
                     logging.debug("cell checking empty: %s", cell)
                     attack_possible = False
                     potential_flips = []
