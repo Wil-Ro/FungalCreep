@@ -26,8 +26,8 @@ class EmptyAcre(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        logging.info("This acre is empty")
+        #logging.info("This acre is empty")
         from .cropType import CropType
         newCrop = CropType.empty.value()
-        logging.debug(newCrop)
+        #logging.debug(newCrop)
         board[x][y] = newCrop

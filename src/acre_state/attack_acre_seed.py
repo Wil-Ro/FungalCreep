@@ -30,15 +30,15 @@ class AttackAcreSeed(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        logging.info("Attack seeds become sprouts")
+        #logging.info("Attack seeds become sprouts")
         from .cropType import CropType
         if self.doesSurroundingContainCrop(board, x, y):
             newCrop = CropType.sprout.value()
-            logging.info("This seed sprouted")
+            #logging.info("This seed sprouted")
         else:
             newCrop = CropType.empty.value()
-            logging.debug("This seed not sprouted")
-        logging.debug(newCrop)
+            #logging.debug("This seed not sprouted")
+        #logging.debug(newCrop)
         board[x][y] = newCrop
 
     @staticmethod
