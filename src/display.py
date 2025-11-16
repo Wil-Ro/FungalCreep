@@ -1,5 +1,7 @@
 import curses
 import logging
+
+from menu_options import MenuOptions
 '''
 Curses gives us a single "window" object that does input and output,
 it does this with weird quirks because its a c program under the hood.
@@ -14,10 +16,14 @@ and menu
 
 class Display:
     def __init__(self, window):
+
         self.window = window
         curses.noecho()
         curses.cbreak()
         curses.curs_set(0)
+
+        self.menu_options_list = [option.value for option in MenuOptions]
+
 
     def __del__(self):
         curses.nocbreak()
@@ -46,3 +52,30 @@ class Display:
                 x += 1
             y += 1
             x = 0
+
+    def draw_menu(self, players, current_option):
+        """
+        Draws menu on the screen with players names in players colors
+        :param players: list of players
+        :return:
+        """
+        player_names = ""
+        for player in players:
+            player_names += player.name + " "
+
+        self.write_string(0,0, player_names)
+
+        # menu_options = ["Play\n", "Change Player 1 name \n", "Change Player 2 name \n", "Exit\n"]
+        menu = self.menu_options_list.copy()
+        menu[current_option] = ">" + menu[current_option]
+        logging.debug(menu)
+        logging.debug(current_option)
+        self.write_string(0, 2, ''.join(menu))
+
+    def draw_score(self, score):
+        """
+
+        :param score: list of player scores
+        :return:
+        """
+        pass
