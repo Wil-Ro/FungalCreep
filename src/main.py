@@ -80,6 +80,8 @@ class Game:
             item = CropType.crop.value
 
         self.players[player].board.set_acre_state(x, y, item())
+        logging.debug(self.get_current_player().name)
+        logging.debug(userInput)
         # self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
         self.get_current_player().board = self.updater.GrowthUpdate(self.get_current_player().board)
 
@@ -120,9 +122,6 @@ class Game:
             self.disp.write_string(20, 7, player_2_move)
             self.disp.write_string(0, 13, f"{self.get_current_player().name}'s turn'")
             user_input = self.inter.input_box(0, 15, "enter move (expected format: boardNumber x y  (no spaces)")
-
-
-
 
             if user_input is not None:
                 if self.process_player_game_input(user_input):

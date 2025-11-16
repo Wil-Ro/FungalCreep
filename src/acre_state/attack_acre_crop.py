@@ -27,11 +27,11 @@ class AttackAcreCrop(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        logging.info("Crop spread to their neighbours")
-        self.growSprouts(board, x, y)
+        # logging.info("Crop spread to their neighbours")
+        self.plant_seeds(board, x, y)
 
     @staticmethod
-    def growSprouts(board, x, y):
+    def plant_seeds(board, x, y):
         """
         Places Seed Crops in empty adjacent non-diagonal spaces
         :param board: board we're referencing
@@ -44,24 +44,24 @@ class AttackAcreCrop(AcreState):
         try:
             if isinstance(board[x - 1][y], CropType.empty.value):
                 board[x - 1][y] = CropType.seed.value()
-                logging.debug("planting Seed at %s", board[x - 1][y])
+                # logging.debug("planting Seed at %s", board[x - 1][y])
         except IndexError:
-            pass
+            logging.debug("Out of bounds seed")
         try:
             if isinstance(board[x + 1][y], CropType.empty.value):
                 board[x + 1][y] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x + 1][y])
+                # logging.debug("planting Seed at %s",board[x + 1][y])
         except IndexError:
-            pass
+            logging.debug("Out of bounds seed")
         try:
             if isinstance(board[x][y - 1], CropType.empty.value):
                 board[x][y - 1] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x][y - 1])
+                # logging.debug("planting Seed at %s",board[x][y - 1])
         except IndexError:
-            pass
+            logging.debug("Out of bounds seed")
         try:
             if isinstance(board[x][y + 1], CropType.empty.value):
                 board[x][y + 1] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x][y + 1])
+                # logging.debug("planting Seed at %s",board[x][y + 1])
         except IndexError:
-            pass
+            logging.debug("Out of bounds seed")

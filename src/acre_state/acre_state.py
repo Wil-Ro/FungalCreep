@@ -29,4 +29,4 @@ class AcreState(ABC):
         :param y: y coordinate on board
         :return: nothing
         """
-        logging.info("You shouldn't be able to call this Acre State Update as it's abstract")
+        # logging.info("You shouldn't be able to call this Acre State Update as it's abstract")
