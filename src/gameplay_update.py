@@ -56,6 +56,7 @@ class GameplayUpdate:
         for i in range (min(x, board_height-y-1)):
             xy_before_below.append([x-i-1, y+i+1])
         logging.debug("directions:",directions)
+        
 
 
         # goes through and puts any acres that should be claimed in to_flip
