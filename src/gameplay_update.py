@@ -76,6 +76,7 @@ class GameplayUpdate:
             #         attack_possible = True
             potential_flips = []
             for cell in direction:
+                logging.debug("cell checking: %s", cell)
                 if attack_possible and isinstance(board.contents[cell], AttackAcre):
                     potential_flips.append(cell)
                 elif attack_possible and isinstance(board.contents[cell], DefenderAcre):
