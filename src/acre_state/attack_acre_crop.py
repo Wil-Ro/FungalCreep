@@ -27,7 +27,7 @@ class AttackAcreCrop(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        logging.info("Crop spread to their neighbours")
+        # logging.info("Crop spread to their neighbours")
         self.growSprouts(board, x, y)
 
     @staticmethod
@@ -44,24 +44,24 @@ class AttackAcreCrop(AcreState):
         try:
             if isinstance(board[x - 1][y], CropType.empty.value):
                 board[x - 1][y] = CropType.seed.value()
-                logging.debug("planting Seed at %s", board[x - 1][y])
+                # logging.debug("planting Seed at %s", board[x - 1][y])
         except IndexError:
             pass
         try:
             if isinstance(board[x + 1][y], CropType.empty.value):
                 board[x + 1][y] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x + 1][y])
+                # logging.debug("planting Seed at %s",board[x + 1][y])
         except IndexError:
             pass
         try:
             if isinstance(board[x][y - 1], CropType.empty.value):
                 board[x][y - 1] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x][y - 1])
+                # logging.debug("planting Seed at %s",board[x][y - 1])
         except IndexError:
             pass
         try:
             if isinstance(board[x][y + 1], CropType.empty.value):
                 board[x][y + 1] = CropType.seed.value()
-                logging.debug("planting Seed at %s",board[x][y + 1])
+                # logging.debug("planting Seed at %s",board[x][y + 1])
         except IndexError:
             pass

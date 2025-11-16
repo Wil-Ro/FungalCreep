@@ -55,7 +55,7 @@ class GameplayUpdate:
             y_below.append(board.contents[x,y+i+1])
         for i in range (min(x, board_height-y-1)):
             xy_before_below.append(board.contents[x-i-1, y+i+1])
-        logging.debug(directions)
+        logging.debug("Direction %s", directions)
 
 
         # goes through and puts any acres that should be claimed in to_flip
@@ -67,8 +67,10 @@ class GameplayUpdate:
             #         attack_possible = True
             potential_flips = []
             for cell in direction:
+                logging.debug("Cell %s", cell)
                 if attack_possible and isinstance(cell, AttackAcre):
                     potential_flips.append(cell)
+                    board[x][y] = DefenderAcre()
                 elif attack_possible and isinstance(cell, DefenderAcre):
                     attack_possible = False
                     to_flip.append(potential_flips)
@@ -76,8 +78,11 @@ class GameplayUpdate:
                     attack_possible = False
                     potential_flips = []
 
-        for cell in to_flip:
-            cell = DefenderAcre
+
+        logging.debug("to_flip: %s", to_flip)
+        # for cell in to_flip:
+        #     cell = DefenderAcre
+
 
         return board
     # oats
@@ -95,10 +100,10 @@ class GameplayUpdate:
         # updating contents for each acreState object contained in each index
         for x, row in enumerate(board.contents):
             for y, acre in enumerate(row):
-                logging.debug("Updating cell: %s,%s", x,y)
+                # logging.debug("Updating cell: %s,%s", x,y)
                 acre.update(board.contents, x, y)
 
-        # logging.debug(board.contents)
+        logging.debug(board.contents)
 
         logging.debug("finished growth update")
         # logging.debug(board)

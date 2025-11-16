@@ -25,4 +25,4 @@ class DefenderAcre(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        logging.info("I'm a defender, you don't have anything to do with me in growth phase")
+        # logging.info("I'm a defender, you don't have anything to do with me in growth phase")
