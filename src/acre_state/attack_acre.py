@@ -10,14 +10,9 @@ Inherits from acre state class
 """
 class AttackAcre(AcreState):
 
-    def __init__(self, symbol, style, colour):
-        """
+    def __init__(self):
 
-        :param symbol:
-        :param style:
-        :param colour:
-        """
-        super.__init__(symbol, style, colour)
+        super.__init__()
 
     @abstractmethod
     def update(self, board, x, y):

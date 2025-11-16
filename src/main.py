@@ -46,19 +46,27 @@ class Game:
     def process_dev_input(self, input):
         # player number | item placing | x | y
         opts = {"a": DefenderAcre, "b": AttackAcreCrop}
-        player =int(input[0])
-        item = opts[input[1]]
-        x =int(input[2])
-        y =int(input[3])
+        try:
+            player =int(input[0])
+            item = opts[input[1]]
+            x =int(input[2])
+            y =int(input[3])
+        except (IndexError, ValueError):
+            logging.info("missing some user input: %n", input)
+            return
 
         self.players[player].board.set_acre_state(x, y, item())
         self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
 
     def process_player_input(self, input):
         # board (1-2) | x | y
-        player = int(input[0])-1
-        x = int(input[1])
-        y = int(input[2])
+        try:
+            player = int(input[0])-1
+            x = int(input[1])
+            y = int(input[2])
+        except (IndexError, ValueError):
+            logging.info("missing some user input: %n", input)
+            return
 
         if player == self.turn_index:
             item = DefenderAcre
