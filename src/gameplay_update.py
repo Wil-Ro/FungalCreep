@@ -1,9 +1,4 @@
-import numpy as np
-from board import Board
-from acre_state.defender_acre import DefenderAcre
-from acre_state.empty_acre import EmptyAcre
-from acre_state.attack_acre import AttackAcre
-from acre_state.attack_acre_seed import AttackAcreSeed
+from acre_state.cropType import CropType
 import logging
 
 
@@ -13,7 +8,7 @@ class GameplayUpdate:
 
         """
 
-    def OthelloUpdate(self, board, x, y):
+    def OthelloUpdate(self, board, y, x):
         logging.debug("fuck me sideways")
         # Dave time
         # x and y is the most recent played piece - the one that initiates the flips
@@ -40,8 +35,7 @@ class GameplayUpdate:
         xy_before_below = []
         directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
         for i in range (x):
-            x_before.append([i,y])
-            x_before.reverse()
+            x_before.append([x-1-i,y])
         for i in range (min(x, y)):
             xy_before_above.append([x-i-1, y-i-1])
         for i in range (y):
@@ -78,22 +72,23 @@ class GameplayUpdate:
             potential_flips = []
             for cell in direction:
                 logging.debug("cell checking: %s", cell)
-                logging.debug("WHAT IS YOUR FUCKING TYPE %s", board.contents[cell[0]][cell[1]])
-                if attack_possible and isinstance(board.contents[cell[0]][cell[1]], AttackAcre):
+                logging.debug("WHAT IS YOUR FUCKING TYPE %s", type(board.contents[cell[0]][cell[1]]))
+                if attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.crop.value):
                     logging.debug("cell checking attack: %s", cell)
                     potential_flips.append(cell)
-                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], DefenderAcre):
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.defender.value):
                     logging.debug("cell checking defender: %s", cell)
                     attack_possible = False
-                    to_flip.append(potential_flips)
-                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], EmptyAcre):
+                    for fuck in potential_flips:
+                        to_flip.append(fuck)
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.empty.value):
                     logging.debug("cell checking empty: %s", cell)
                     attack_possible = False
                     potential_flips = []
             logging.debug("potential flips: %s", potential_flips)
 
         for cell in to_flip:
-            board.contents[x,y] = DefenderAcre
+            board.contents[cell[0]][cell[1]] = CropType.defender.value()
             logging.debug("cunt: %s", [x,y])
 
         return board
@@ -117,7 +112,7 @@ class GameplayUpdate:
 
         for x, row in enumerate(board.contents):
             for y, acre in enumerate(row):
-                if isinstance(acre, AttackAcreSeed):
+                if isinstance(acre, CropType.crop.value):
                     acre.new_seed = False
 
         logging.debug("finished growth update")

@@ -82,7 +82,7 @@ class Game:
         self.players[player].board.set_acre_state(x, y, item())
         logging.debug(self.get_current_player().name)
         logging.debug(userInput)
-        # self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
+        self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
         self.get_current_player().board = self.updater.GrowthUpdate(self.get_current_player().board)
 
         return True
