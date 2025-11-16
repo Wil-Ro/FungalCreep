@@ -77,6 +77,7 @@ class GameplayUpdate:
             potential_flips = []
             for cell in direction:
                 logging.debug("cell checking: %s", cell)
+                logging.debug("WHAT IS YOUR FUCKING TYPE %s", board.contents[cell])
                 if attack_possible and isinstance(board.contents[cell], AttackAcre):
                     logging.debug("cell checking attack: %s", cell)
                     potential_flips.append(cell)
