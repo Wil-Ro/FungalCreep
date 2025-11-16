@@ -57,7 +57,7 @@ class GameplayUpdate:
                 y_below.append([x,y+i+1])
             for i in range (min(x, board_height-y-1)):
                 xy_before_below.append([x-i-1, y+i+1])
-            logging.debug("directions:", directions)
+            logging.debug("directions: %s", directions)
         except:
             logging.debug("whoopsie I crashed")
 
