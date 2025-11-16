@@ -84,9 +84,11 @@ class GameplayUpdate:
                 elif attack_possible and isinstance(board.contents[cell], EmptyAcre):
                     attack_possible = False
                     potential_flips = []
+            logging.debug("potential flips: %s", potential_flips)
 
         for cell in to_flip:
             board.contents[x,y] = DefenderAcre
+            logging.debug("cunt: %s", [x,y])
 
         return board
     # oats
