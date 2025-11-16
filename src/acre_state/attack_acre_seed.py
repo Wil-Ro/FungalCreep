@@ -19,6 +19,7 @@ class AttackAcreSeed(AcreState):
         :param colour:
         """
         super().__init__("▁", curses.A_NORMAL, None)
+        self.new_seed = True
 
     def update(self, board, x, y):
         """
@@ -30,16 +31,17 @@ class AttackAcreSeed(AcreState):
         :param y: y coordinate on board
         :return:
         """
-        #logging.info("Attack seeds become sprouts")
-        from .cropType import CropType
-        if self.doesSurroundingContainCrop(board, x, y):
-            newCrop = CropType.sprout.value()
-            #logging.info("This seed sprouted")
-        else:
-            newCrop = CropType.empty.value()
-            #logging.debug("This seed not sprouted")
-        #logging.debug(newCrop)
-        board[x][y] = newCrop
+        if not self.new_seed:
+            # logging.info("Attack seeds become sprouts")
+            from .cropType import CropType
+            if self.doesSurroundingContainCrop(board, x, y):
+                newCrop = CropType.sprout.value()
+                logging.info("This seed sprouted")
+            else:
+                newCrop = CropType.empty.value()
+                logging.debug("This seed died")
+            logging.debug("Seed has become %s at %s,%s",newCrop,x,y)
+            board[x][y] = newCrop
 
     @staticmethod
     def doesSurroundingContainCrop(board, x, y):

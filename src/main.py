@@ -78,10 +78,12 @@ class Game:
             item = CropType.defender.value
         else:
             item = CropType.crop.value
-        logging.debug("waaaaaa")
+
         self.players[player].board.set_acre_state(x, y, item())
-        self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
-        #self.get_current_player().board = self.updater.GrowthUpdate(self.get_current_player().board)
+        logging.debug(self.get_current_player().name)
+        logging.debug(userInput)
+        # self.get_current_player().board = self.updater.OthelloUpdate(self.get_current_player().board, x, y)
+        self.get_current_player().board = self.updater.GrowthUpdate(self.get_current_player().board)
 
         return True
 
@@ -161,7 +163,7 @@ class Game:
             self.disp.draw_menu(self.players, current_option)
 
             user_input = self.inp.window.getch()
-            #logging.debug("User input: %s",user_input)
+            logging.debug("User input: %s",user_input)
 
             if user_input is not -1:
 
@@ -177,7 +179,7 @@ class Game:
                 TODO refactor this to use menu option enum
                 """
                 if current_option == 0 and user_input == self.inp.KEY_ENTER:
-                    #logging.debug("Running main game loop")
+                    logging.debug("Running main game loop")
                     self.game_state = GameState.main_loop
                     break
                 if current_option == 1 and user_input == self.inp.KEY_ENTER:
@@ -198,7 +200,7 @@ class Game:
 
 
 
-            #logging.debug("currentOption: %s", current_option)
+            logging.debug("currentOption: %s", current_option)
             self.disp.update_screen()
 
 
@@ -229,7 +231,7 @@ class Game:
             elif self.game_state == GameState.score:
                 self.score()
             elif self.game_state == GameState.exit:
-                #logging.debug("Qutting")
+                logging.debug("Qutting")
                 break
 
 
