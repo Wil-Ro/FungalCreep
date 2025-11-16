@@ -163,7 +163,7 @@ class Game:
             user_input = self.inp.window.getch()
             #logging.debug("User input: %s",user_input)
 
-            if user_input != -1:
+            if user_input is not -1:
 
                 current_option += self.process_player_menu_input(user_input)
 
