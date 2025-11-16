@@ -34,6 +34,8 @@ class GameplayUpdate:
         y_below = []
         xy_before_below = []
         directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
+
+        # adds the coordinates of each cell into its relevant direction
         for i in range (x):
             x_before.append([x-1-i,y])
         for i in range (min(x, y)):
@@ -73,20 +75,27 @@ class GameplayUpdate:
             for cell in direction:
                 logging.debug("cell checking: %s", cell)
                 logging.debug("WHAT IS YOUR FUCKING TYPE %s", type(board.contents[cell[0]][cell[1]]))
+
+                # next cell an attacking one? we can eat that :3
                 if attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.crop.value):
                     logging.debug("cell checking attack: %s", cell)
                     potential_flips.append(cell)
+
+                # next cell a defending one? we can eat everything before it :3 (BUT EATING STOPS HERE  )
                 elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.defender.value):
                     logging.debug("cell checking defender: %s", cell)
                     attack_possible = False
                     for fuck in potential_flips:
                         to_flip.append(fuck)
+
+                # empty cell? no snack for you :(
                 elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.empty.value):
                     logging.debug("cell checking empty: %s", cell)
                     attack_possible = False
                     potential_flips = []
             logging.debug("potential flips: %s", potential_flips)
 
+        # goes through consumed cells and eats them (turns them into defenders)
         for cell in to_flip:
             board.contents[cell[0]][cell[1]] = CropType.defender.value()
             logging.debug("cunt: %s", [x,y])
