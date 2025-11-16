@@ -158,9 +158,17 @@ class Game:
                     self.game_state = GameState.main_loop
                     break
                 if current_option == 1 and user_input == self.inp.KEY_ENTER:
-                    pass
+                    while True:
+                        new_name = self.inter.input_box(0, 15, "Enter player 1 name")
+                        if new_name is not None:
+                            self.players[0].name = new_name
+                            break #TODO YUCKY FIX THIS
                 if current_option == 2 and user_input == self.inp.KEY_ENTER:
-                    pass
+                    while True:
+                        new_name = self.inter.input_box(0, 15, "Enter player 2 name")
+                        if new_name is not None:
+                            self.players[1].name = new_name
+                            break #TODO YUCKY FIX THIS
                 if current_option == 3 and user_input == self.inp.KEY_ENTER:
                     self.game_state = GameState.exit
                     break
