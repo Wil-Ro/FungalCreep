@@ -30,21 +30,13 @@ class GameplayUpdate:
         
         # making 8 lists of the directions going away from the piece that's going to do the othelloing
         x_before = []
-        logging.debug("x_before: %s", x_before)
         xy_before_above = []
-        logging.debug("xy_before_above: %s", xy_before_above)
         y_above = []
-        logging.debug("y_above: %s", y_above)
         xy_after_above = []
-        logging.debug("xy_after_above: %s", xy_after_above)
         x_after = []
-        logging.debug("x_after: %s", x_after)
         xy_after_below = []
-        logging.debug("xy_after_below: %s", xy_after_below)
         y_below = []
-        logging.debug("y_below: %s", y_below)
         xy_before_below = []
-        logging.debug("xy_before_below: %s", xy_before_below)
         directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
         for i in range (x):
             x_before.append([i,y])
@@ -65,6 +57,14 @@ class GameplayUpdate:
         for i in range (min(x, board_height-y-1)):
             xy_before_below.append([x-i-1, y+i+1])
         # logging.debug("directions: %s", directions)
+        logging.debug("x_before: %s", x_before)
+        logging.debug("xy_before_above: %s", xy_before_above)
+        logging.debug("y_above: %s", y_above)
+        logging.debug("xy_after_above: %s", xy_after_above)
+        logging.debug("x_after: %s", x_after)
+        logging.debug("xy_after_below: %s", xy_after_below)
+        logging.debug("y_below: %s", y_below)
+        logging.debug("xy_before_below: %s", xy_before_below)
 
 
 
