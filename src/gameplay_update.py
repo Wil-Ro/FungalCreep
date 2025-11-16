@@ -38,23 +38,23 @@ class GameplayUpdate:
         xy_before_below = []
         directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
         for i in range (x):
-            x_before.append(board.contents[i,y])
+            x_before.append([i,y])
             x_before.reverse()
         for i in range (min(x, y)):
-            xy_before_above.append(board.contents[x-i-1, y-i-1])
+            xy_before_above.append([x-i-1, y-i-1])
         for i in range (y):
-            y_above.append(board.contents[x,i])
+            y_above.append([x,i])
             y_above.reverse()
         for i in range (min(board_width-x-1, y)):
-            xy_after_above.append(board.contents[x+i+1, y-i-1])
+            xy_after_above.append([x+i+1, y-i-1])
         for i in range (board_width-x-1):
-            x_after.append(board.contents[x+i+1,y])
+            x_after.append([x+i+1,y])
         for i in range (min(board_width-x-1, board_height-y-1)):
-            xy_after_below.append(board.contents[x+i+1, y+i+1])
+            xy_after_below.append([x+i+1, y+i+1])
         for i in range (board_height-y-1):
-            y_below.append(board.contents[x,y+i+1])
+            y_below.append([x,y+i+1])
         for i in range (min(x, board_height-y-1)):
-            xy_before_below.append(board.contents[x-i-1, y+i+1])
+            xy_before_below.append([x-i-1, y+i+1])
         logging.debug("directions:",directions)
 
 
@@ -67,17 +67,17 @@ class GameplayUpdate:
             #         attack_possible = True
             potential_flips = []
             for cell in direction:
-                if attack_possible and isinstance(cell, AttackAcre):
+                if attack_possible and isinstance(board.contents[cell], AttackAcre):
                     potential_flips.append(cell)
-                elif attack_possible and isinstance(cell, DefenderAcre):
+                elif attack_possible and isinstance(board.contents[cell], DefenderAcre):
                     attack_possible = False
                     to_flip.append(potential_flips)
-                elif attack_possible and isinstance(cell, EmptyAcre):
+                elif attack_possible and isinstance(board.contents[cell], EmptyAcre):
                     attack_possible = False
                     potential_flips = []
 
         for cell in to_flip:
-            cell = DefenderAcre
+            board.contents[x,y] = DefenderAcre
 
         return board
     # oats
