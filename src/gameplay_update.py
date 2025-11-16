@@ -89,7 +89,7 @@ class GameplayUpdate:
         :return:
         """
         logging.debug("growth update")
-        logging.debug(board.contents)
+        # logging.debug(board.contents)
 
         # iterates over the rows and colums of board
         # updating contents for each acreState object contained in each index
@@ -98,7 +98,7 @@ class GameplayUpdate:
                 logging.debug("Updating cell: %s,%s", x,y)
                 acre.update(board.contents, x, y)
 
-        logging.debug(board.contents)
+        # logging.debug(board.contents)
 
         logging.debug("finished growth update")
         # logging.debug(board)
