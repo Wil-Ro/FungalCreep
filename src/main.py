@@ -43,20 +43,20 @@ class Game:
         # we eventually want:
         # players are stored here, they store their boards
 
-    def process_dev_input(self, userInput):
-        # player number | item placing | x | y
-        opts = {"a": DefenderAcre, "b": AttackAcreCrop}
-        try:
-            player =int(userInput[0])
-            item = opts[userInput[1]]
-            x =int(userInput[2])
-            y =int(userInput[3])
-        except (IndexError, ValueError):
-            logging.debug(f"missing some user input: {userInput}")
-            return
-
-        self.players[player].board.set_acre_state(x, y, item())
-        self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
+    # def process_dev_input(self, userInput):
+    #     # player number | item placing | x | y
+    #     opts = {"a": DefenderAcre, "b": AttackAcreCrop}
+    #     try:
+    #         player =int(userInput[0])
+    #         item = opts[userInput[1]]
+    #         x =int(userInput[2])
+    #         y =int(userInput[3])
+    #     except (IndexError, ValueError) as e:
+    #         logging.debug(f"missing some user input: {userInput} {e}")
+    #         return
+    #
+    #     self.players[player].board.set_acre_state(x, y, item())
+    #     self.players[player].board = self.updater.OthelloUpdate(self.players[0].board, y, x)
 
     def process_player_input(self, userInput):
         # board (1-2) | x | y
@@ -64,8 +64,8 @@ class Game:
             player = int(userInput[0])-1
             x = int(userInput[1])
             y = int(userInput[2])
-        except (IndexError, ValueError):
-            logging.debug(f"missing some user input: {userInput}")
+        except (IndexError, ValueError) as e:
+            logging.debug(f"missing some user input: {userInput} {e}")
             return
 
         if player == self.turn_index:
@@ -90,7 +90,7 @@ class Game:
             self.disp.draw_board(0, 0, self.players[0].board)
             self.disp.draw_board(0, 7, self.players[1].board)
             self.disp.write_string(0, 13, f"{self.get_current_player().name}'s turn'")
-            userInput = self.inter.input_box(0, 15, "enter move")
+            userInput = self.inter.input_box(0, 15, "enter move (expected format: boardNumber x y  (no spaces)")
             if userInput is not None:
                 if self.process_player_input(userInput):
                     self.increment_player()
