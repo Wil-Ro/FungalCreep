@@ -28,7 +28,7 @@ class GameplayUpdate:
 
         
         # making 8 lists of the directions going away from the piece that's going to do the othelloing
-        x_before =[]
+        x_before = []
         xy_before_above = []
         y_above = []
         xy_after_above = []
@@ -55,7 +55,7 @@ class GameplayUpdate:
             y_below.append(board.contents[x,y+i+1])
         for i in range (min(x, board_height-y-1)):
             xy_before_below.append(board.contents[x-i-1, y+i+1])
-        logging.debug(directions)
+        logging.debug("directions:",directions)
 
 
         # goes through and puts any acres that should be claimed in to_flip
