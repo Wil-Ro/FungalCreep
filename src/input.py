@@ -13,7 +13,7 @@ something nicer
 class Input:
     KEY_UP = curses.KEY_UP
     KEY_DOWN = curses.KEY_DOWN
-    KEY_ENTER = 10
+    KEY_ENTER = 32 #TODO YUCKY FIX THIS
 
     def __init__(self, window):
         self.window = window
