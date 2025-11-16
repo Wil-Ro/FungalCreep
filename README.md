@@ -13,15 +13,16 @@ Game for ascii game jam
     * Able to attack and defend, specify grid index and board
     * Able to set player name, color
     * Menu system
+    * ### Bounds validation
 2. Display Board
     * Display unique symbols for each tile type
-    * # Color and player names displayed 
+    * ### Color and player names displayed 
     * Display two boards
 3. Growth Behaviour
     * growth cycle of crop from seed to sprout
     * seeds die if crop dies
     * Mature crops spread seeds
-    * # some crops growing faster than others
+    * ### some crops growing faster than others
 4. Othello Behaviour
     *
 5. State Machine program 
