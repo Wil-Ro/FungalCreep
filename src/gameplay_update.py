@@ -1,9 +1,4 @@
-import numpy as np
-from board import Board
-from acre_state.defender_acre import DefenderAcre
-from acre_state.empty_acre import EmptyAcre
-from acre_state.attack_acre import AttackAcre
-from acre_state.attack_acre_seed import AttackAcreSeed
+from acre_state.cropType import CropType
 import logging
 
 
@@ -13,7 +8,7 @@ class GameplayUpdate:
 
         """
 
-    def OthelloUpdate(self, board, x, y):
+    def OthelloUpdate(self, board, y, x):
         logging.debug("fuck me sideways")
         # Dave time
         # x and y is the most recent played piece - the one that initiates the flips
@@ -21,49 +16,16 @@ class GameplayUpdate:
         Updates board state for othello rules
         :return:
         """
-        # board_width = Board.default_size[0]
-        # board_height = Board.default_size[1]
+        #board_width = Board.default_size[0]
+        #board_height = Board.default_size[1]
         board_width = 6
         board_height = 6
         # remember to update these if I find something that makes that easy
 
 
+        
         # making 8 lists of the directions going away from the piece that's going to do the othelloing
-        try:
-            x_before = []
-            xy_before_above = []
-            y_above = []
-            xy_after_above = []
-            x_after = []
-            xy_after_below = []
-            y_below = []
-            xy_before_below = []
-            directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
-
-            for i in range (x):
-                x_before.append([i,y])
-                x_before.reverse()
-
-            for i in range (min(x, y)):
-                xy_before_above.append([x-i-1, y-i-1])
-            for i in range (y):
-                y_above.append([x,i])
-                y_above.reverse()
-            for i in range (min(board_width-x-1, y)):
-                xy_after_above.append([x+i+1, y-i-1])
-            for i in range (board_width-x-1):
-                x_after.append([x+i+1,y])
-            for i in range (min(board_width-x-1, board_height-y-1)):
-                xy_after_below.append([x+i+1, y+i+1])
-            for i in range (board_height-y-1):
-                y_below.append([x,y+i+1])
-            for i in range (min(x, board_height-y-1)):
-                xy_before_below.append([x-i-1, y+i+1])
-            logging.debug("directions: %s", directions)
-        except Exception as e:
-            logging.debug(e)
-
-        x_before =[]
+        x_before = []
         xy_before_above = []
         y_above = []
         xy_after_above = []
@@ -73,24 +35,31 @@ class GameplayUpdate:
         xy_before_below = []
         directions = [x_before, xy_before_above, y_above, xy_after_above, x_after, xy_after_below, y_below, xy_before_below]
         for i in range (x):
-            x_before.append(board.contents[i,y])
-            x_before.reverse()
+            x_before.append([x-1-i,y])
         for i in range (min(x, y)):
-            xy_before_above.append(board.contents[x-i-1, y-i-1])
+            xy_before_above.append([x-i-1, y-i-1])
         for i in range (y):
-            y_above.append(board.contents[x,i])
-            y_above.reverse()
+            y_above.append([x,y-i-1])
         for i in range (min(board_width-x-1, y)):
-            xy_after_above.append(board.contents[x+i+1, y-i-1])
+            xy_after_above.append([x+i+1, y-i-1])
         for i in range (board_width-x-1):
-            x_after.append(board.contents[x+i+1,y])
+            x_after.append([x+i+1,y])
         for i in range (min(board_width-x-1, board_height-y-1)):
-            xy_after_below.append(board.contents[x+i+1, y+i+1])
+            xy_after_below.append([x+i+1, y+i+1])
         for i in range (board_height-y-1):
-            y_below.append(board.contents[x,y+i+1])
+            y_below.append([x,y+i+1])
         for i in range (min(x, board_height-y-1)):
-            xy_before_below.append(board.contents[x-i-1, y+i+1])
-        logging.debug("Direction %s", directions)
+            xy_before_below.append([x-i-1, y+i+1])
+        # logging.debug("directions: %s", directions)
+        logging.debug("x_before: %s", x_before)
+        logging.debug("xy_before_above: %s", xy_before_above)
+        logging.debug("y_above: %s", y_above)
+        logging.debug("xy_after_above: %s", xy_after_above)
+        logging.debug("x_after: %s", x_after)
+        logging.debug("xy_after_below: %s", xy_after_below)
+        logging.debug("y_below: %s", y_below)
+        logging.debug("xy_before_below: %s", xy_before_below)
+
 
 
         # goes through and puts any acres that should be claimed in to_flip
@@ -102,22 +71,25 @@ class GameplayUpdate:
             #         attack_possible = True
             potential_flips = []
             for cell in direction:
-                logging.debug("Cell %s", cell)
-                if attack_possible and isinstance(cell, AttackAcre):
+                logging.debug("cell checking: %s", cell)
+                logging.debug("WHAT IS YOUR FUCKING TYPE %s", type(board.contents[cell[0]][cell[1]]))
+                if attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.crop.value):
+                    logging.debug("cell checking attack: %s", cell)
                     potential_flips.append(cell)
-                    board[x][y] = DefenderAcre()
-                elif attack_possible and isinstance(cell, DefenderAcre):
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.defender.value):
+                    logging.debug("cell checking defender: %s", cell)
                     attack_possible = False
-                    to_flip.append(potential_flips)
-                elif attack_possible and isinstance(cell, EmptyAcre):
+                    for fuck in potential_flips:
+                        to_flip.append(fuck)
+                elif attack_possible and isinstance(board.contents[cell[0]][cell[1]], CropType.empty.value):
+                    logging.debug("cell checking empty: %s", cell)
                     attack_possible = False
                     potential_flips = []
+            logging.debug("potential flips: %s", potential_flips)
 
-
-        logging.debug("to_flip: %s", to_flip)
-        # for cell in to_flip:
-        #     cell = DefenderAcre
-
+        for cell in to_flip:
+            board.contents[cell[0]][cell[1]] = CropType.defender.value()
+            logging.debug("cunt: %s", [x,y])
 
         return board
     # oats
@@ -140,7 +112,7 @@ class GameplayUpdate:
 
         for x, row in enumerate(board.contents):
             for y, acre in enumerate(row):
-                if isinstance(acre, AttackAcreSeed):
+                if isinstance(acre, CropType.crop.value):
                     acre.new_seed = False
 
         logging.debug("finished growth update")

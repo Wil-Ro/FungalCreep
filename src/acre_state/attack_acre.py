@@ -23,6 +23,7 @@ class AttackAcre(AcreState):
         :return:
         """
 
+        #logging.info("You shouldn't be able to call this attack acre")
         # logging.info("You shouldn't be able to call this attack acre")
 
 

@@ -68,8 +68,8 @@ class Display:
         # menu_options = ["Play\n", "Change Player 1 name \n", "Change Player 2 name \n", "Exit\n"]
         menu = self.menu_options_list.copy()
         menu[current_option] = ">" + menu[current_option]
-        logging.debug(menu)
-        logging.debug(current_option)
+        #logging.debug(menu)
+        #logging.debug(current_option)
         self.write_string(0, 2, ''.join(menu))
 
     def draw_score(self, score):

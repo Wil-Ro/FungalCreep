@@ -43,7 +43,6 @@ class AttackAcreSeed(AcreState):
             logging.debug("Seed has become %s at %s,%s",newCrop,x,y)
             board[x][y] = newCrop
 
-
     @staticmethod
     def doesSurroundingContainCrop(board, x, y):
         """
