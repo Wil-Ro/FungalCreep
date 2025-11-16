@@ -44,8 +44,7 @@ class GameplayUpdate:
         for i in range (min(x, y)):
             xy_before_above.append([x-i-1, y-i-1])
         for i in range (y):
-            y_above.append([x,i])
-            y_above.reverse()
+            y_above.append([x,y-i-1])
         for i in range (min(board_width-x-1, y)):
             xy_after_above.append([x+i+1, y-i-1])
         for i in range (board_width-x-1):
